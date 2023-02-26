@@ -18,7 +18,7 @@ public class GivenCodeService {
     //      Create
     public ApiResponse addGivenCode(GivenCode givenCode) {
         GivenCode givenCode1 = new GivenCode();
-        givenCode1.setText(givenCode.getText());
+        givenCode1.setCode(givenCode.getCode());
 
         givenCodeRepository.save(givenCode1);
         return new ApiResponse("Saved successfully", true);
@@ -43,7 +43,7 @@ public class GivenCodeService {
         if (!optionalGivenCode.isPresent())
             return new ApiResponse("Such GivenCode was not found", false);
         GivenCode editGivenCode = optionalGivenCode.get();
-        editGivenCode.setText(givenCode.getText());
+        editGivenCode.setCode(givenCode.getCode());
 
         givenCodeRepository.save(editGivenCode);
         return new ApiResponse("Edited successfully", true);

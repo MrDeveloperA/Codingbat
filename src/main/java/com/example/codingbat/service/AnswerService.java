@@ -2,7 +2,7 @@ package com.example.codingbat.service;
 
 import com.example.codingbat.diler.ApiResponse;
 import com.example.codingbat.diler.AnswerDto;
-import com.example.codingbat.entity.Link;
+
 import com.example.codingbat.entity.Answer;
 import com.example.codingbat.entity.Theme;
 import com.example.codingbat.entity.User;
