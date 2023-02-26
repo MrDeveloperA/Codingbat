@@ -8,11 +8,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-public class GivenCode {
+@Entity(name = "user1")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
-    private String code;
+    @OneToOne
+    private Account account;
+    @OneToOne
+    private Answer answer;
+    @ManyToOne
+    private Language language;
 }

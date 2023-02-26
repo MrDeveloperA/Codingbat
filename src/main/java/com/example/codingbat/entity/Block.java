@@ -9,10 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class GivenCode {
+public class Block {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
-    private String code;
+    private String name;
+    private Integer numberStar;
+    @OneToOne
+    private Declare declare;
+    @ManyToOne
+    private Theme theme;
 }

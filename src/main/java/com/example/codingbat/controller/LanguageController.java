@@ -1,8 +1,9 @@
 package com.example.codingbat.controller;
 
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.GivenCode;
-import com.example.codingbat.service.GivenCodeService;
+import com.example.codingbat.diler.LanguageDto;
+import com.example.codingbat.entity.Language;
+import com.example.codingbat.service.LanguageService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +17,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/givenCode")
+@RequestMapping("/api/language")
 
-public class GivenCodeController {
+public class LanguageController {
     @Autowired
-    GivenCodeService givenCodeService;
+    LanguageService languageService;
 
     //    Create
     @PostMapping
-    public ResponseEntity<ApiResponse> addGivenCode(@Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.addGivenCode(givenCode);
+    public ResponseEntity<ApiResponse> addLanguage(@Valid @RequestBody LanguageDto languageDto) {
+        ApiResponse apiResponse = languageService.addLanguage(languageDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(201).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -33,22 +34,22 @@ public class GivenCodeController {
 
     //    Get
     @GetMapping
-    public ResponseEntity<List<GivenCode>> getGivenCode() {
-        List<GivenCode> givenCodes = givenCodeService.getGivenCode();
-        return ResponseEntity.ok(givenCodes);
+    public ResponseEntity<List<Language>> getLanguage() {
+        List<Language> languages = languageService.getLanguage();
+        return ResponseEntity.ok(languages);
     }
 
     //    Get by id
     @GetMapping("/{id}")
-    public ResponseEntity<GivenCode> getGivenCodeById(@PathVariable Integer id) {
-        GivenCode givenCodeById = givenCodeService.getGivenCodeById(id);
-        return ResponseEntity.ok(givenCodeById);
+    public ResponseEntity<Language> getLanguageById(@PathVariable Integer id) {
+        Language languageById = languageService.getLanguageById(id);
+        return ResponseEntity.ok(languageById);
     }
 
     //    Update
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editGivenCode(@PathVariable Integer id, @Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.editGivenCode(id, givenCode);
+    public ResponseEntity<ApiResponse> editLanguage(@PathVariable Integer id, @Valid @RequestBody LanguageDto languageDto) {
+        ApiResponse apiResponse = languageService.editLanguage(id, languageDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -56,8 +57,8 @@ public class GivenCodeController {
 
     //    Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteGivenCode(@PathVariable Integer id) {
-        ApiResponse apiResponse = givenCodeService.deleteGivenCode(id);
+    public ResponseEntity<ApiResponse> deleteLanguage(@PathVariable Integer id) {
+        ApiResponse apiResponse = languageService.deleteLanguage(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
     }
 

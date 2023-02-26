@@ -1,6 +1,5 @@
 package com.example.codingbat.repository;
 
-import com.example.codingbat.entity.Attachment;
 import com.example.codingbat.entity.AttachmentContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 

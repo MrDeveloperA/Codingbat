@@ -1,9 +1,7 @@
 package com.example.codingbat.service;
 
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.Done;
 import com.example.codingbat.entity.GivenCode;
-import com.example.codingbat.repository.DoneRepository;
 import com.example.codingbat.repository.GivenCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

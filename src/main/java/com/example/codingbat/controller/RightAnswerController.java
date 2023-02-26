@@ -1,8 +1,8 @@
 package com.example.codingbat.controller;
 
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.GivenCode;
-import com.example.codingbat.service.GivenCodeService;
+import com.example.codingbat.entity.RightAnswer;
+import com.example.codingbat.service.RightAnswerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/givenCode")
+@RequestMapping("/api/rightAnswer")
 
-public class GivenCodeController {
+public class RightAnswerController {
     @Autowired
-    GivenCodeService givenCodeService;
+    RightAnswerService rightAnswerService;
 
     //    Create
     @PostMapping
-    public ResponseEntity<ApiResponse> addGivenCode(@Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.addGivenCode(givenCode);
+    public ResponseEntity<ApiResponse> addRightAnswer(@Valid @RequestBody RightAnswer rightAnswer) {
+        ApiResponse apiResponse = rightAnswerService.addRightAnswer(rightAnswer);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(201).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -33,22 +33,22 @@ public class GivenCodeController {
 
     //    Get
     @GetMapping
-    public ResponseEntity<List<GivenCode>> getGivenCode() {
-        List<GivenCode> givenCodes = givenCodeService.getGivenCode();
-        return ResponseEntity.ok(givenCodes);
+    public ResponseEntity<List<RightAnswer>> getRightAnswer() {
+        List<RightAnswer> rightAnswers = rightAnswerService.getRightAnswer();
+        return ResponseEntity.ok(rightAnswers);
     }
 
     //    Get by id
     @GetMapping("/{id}")
-    public ResponseEntity<GivenCode> getGivenCodeById(@PathVariable Integer id) {
-        GivenCode givenCodeById = givenCodeService.getGivenCodeById(id);
-        return ResponseEntity.ok(givenCodeById);
+    public ResponseEntity<RightAnswer> getRightAnswerById(@PathVariable Integer id) {
+        RightAnswer rightAnswerById = rightAnswerService.getRightAnswerById(id);
+        return ResponseEntity.ok(rightAnswerById);
     }
 
     //    Update
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editGivenCode(@PathVariable Integer id, @Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.editGivenCode(id, givenCode);
+    public ResponseEntity<ApiResponse> editRightAnswer(@PathVariable Integer id, @Valid @RequestBody RightAnswer rightAnswer) {
+        ApiResponse apiResponse = rightAnswerService.editRightAnswer(id, rightAnswer);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -56,8 +56,8 @@ public class GivenCodeController {
 
     //    Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteGivenCode(@PathVariable Integer id) {
-        ApiResponse apiResponse = givenCodeService.deleteGivenCode(id);
+    public ResponseEntity<ApiResponse> deleteRightAnswer(@PathVariable Integer id) {
+        ApiResponse apiResponse = rightAnswerService.deleteRightAnswer(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
     }
 

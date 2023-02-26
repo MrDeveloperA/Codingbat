@@ -1,10 +1,7 @@
 package com.example.codingbat.controller;
 
-import com.example.codingbat.diler.AboutDto;
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.About;
 import com.example.codingbat.entity.Account;
-import com.example.codingbat.service.AboutService;
 import com.example.codingbat.service.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

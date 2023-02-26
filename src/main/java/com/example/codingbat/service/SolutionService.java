@@ -1,10 +1,10 @@
 package com.example.codingbat.service;
 
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.Done;
-import com.example.codingbat.entity.Solution;
-import com.example.codingbat.repository.DoneRepository;
-import com.example.codingbat.repository.SolutionRepository;
+import com.example.codingbat.diler.AnswerDto;
+import com.example.codingbat.diler.SolutionDto;
+import com.example.codingbat.entity.*;
+import com.example.codingbat.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,29 @@ import java.util.Optional;
 public class SolutionService {
     @Autowired
     SolutionRepository solutionRepository;
+    @Autowired
+    GivenCodeRepository givenCodeRepository;
+    @Autowired
+    RightAnswerRepository rightAnswerRepository;
 
 
     //      Create
-    public ApiResponse addSolution(Solution solution) {
-        Solution solution1 = new Solution();
-        solution1.setText(solution.getText());
+    public ApiResponse addSolution(SolutionDto solutionDto) {
+        Solution solution = new Solution();
 
-        solutionRepository.save(solution1);
+        Optional<GivenCode> optionalGivenCode = givenCodeRepository.findById(solutionDto.getGivenCode());
+        if (!optionalGivenCode.isPresent())
+            return new ApiResponse("Not found", false);
+        solution.setGivenCode(optionalGivenCode.get());
+
+        Optional<RightAnswer> optionalRightAnswer = rightAnswerRepository.findById(solutionDto.getRightAnswer());
+        if (!optionalRightAnswer.isPresent())
+            return new ApiResponse("Not found", false);
+        solution.setRightAnswer(optionalRightAnswer.get());
+
+        solutionRepository.save(solution);
         return new ApiResponse("Saved successfully", true);
+
     }
 
     //  Get
@@ -40,15 +54,24 @@ public class SolutionService {
     }
 
     //    Update
-    public ApiResponse editSolution(Integer id, Solution solution) {
+    public ApiResponse editSolution (Integer id, SolutionDto solutionDto) {
         Optional<Solution> optionalSolution = solutionRepository.findById(id);
         if (!optionalSolution.isPresent())
             return new ApiResponse("Not found", false);
         Solution editSolution = optionalSolution.get();
-        editSolution.setText(solution.getText());
+
+        Optional<GivenCode> optionalGivenCode = givenCodeRepository.findById(solutionDto.getGivenCode());
+        if (!optionalGivenCode.isPresent())
+            return new ApiResponse("Not found", false);
+        editSolution.setGivenCode(optionalGivenCode.get());
+
+        Optional<RightAnswer> optionalRightAnswer = rightAnswerRepository.findById(solutionDto.getRightAnswer());
+        if (!optionalRightAnswer.isPresent())
+            return new ApiResponse("Not found", false);
+        editSolution.setRightAnswer(optionalRightAnswer.get());
 
         solutionRepository.save(editSolution);
-        return new ApiResponse("Edited successfully", true);
+        return new ApiResponse("Saved successfully", true);
     }
 
     //     Delete

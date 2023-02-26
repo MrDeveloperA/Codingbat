@@ -1,10 +1,11 @@
 package com.example.codingbat.controller;
 
+import com.example.codingbat.diler.AnswerDto;
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.Done;
+import com.example.codingbat.diler.SolutionDto;
+import com.example.codingbat.entity.Answer;
 import com.example.codingbat.entity.Solution;
-import com.example.codingbat.repository.SolutionRepository;
-import com.example.codingbat.service.DoneService;
+import com.example.codingbat.service.AnswerService;
 import com.example.codingbat.service.SolutionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 
 @RestController
 @RequestMapping("/api/solution")
@@ -28,8 +28,8 @@ public class SolutionController {
 
     //    Create
     @PostMapping
-    public ResponseEntity<ApiResponse> addSolution(@Valid @RequestBody Solution solution) {
-        ApiResponse apiResponse = solutionService.addSolution(solution);
+    public ResponseEntity<ApiResponse> addSolution(@Valid @RequestBody SolutionDto solutionDto) {
+        ApiResponse apiResponse = solutionService.addSolution(solutionDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(201).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -51,8 +51,8 @@ public class SolutionController {
 
     //    Update
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editSolution(@PathVariable Integer id, @Valid @RequestBody Solution solution) {
-        ApiResponse apiResponse = solutionService.editSolution(id, solution);
+    public ResponseEntity<ApiResponse> editSolution(@PathVariable Integer id, @Valid @RequestBody SolutionDto solutionDto) {
+        ApiResponse apiResponse = solutionService.editSolution(id, solutionDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);

@@ -1,13 +1,8 @@
 package com.example.codingbat.service;
 
-import com.example.codingbat.diler.AboutDto;
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.About;
 import com.example.codingbat.entity.Account;
-import com.example.codingbat.entity.Link;
-import com.example.codingbat.repository.AboutRepository;
 import com.example.codingbat.repository.AccountRepository;
-import com.example.codingbat.repository.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

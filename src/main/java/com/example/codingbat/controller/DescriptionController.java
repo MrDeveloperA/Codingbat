@@ -1,8 +1,8 @@
 package com.example.codingbat.controller;
 
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.GivenCode;
-import com.example.codingbat.service.GivenCodeService;
+import com.example.codingbat.entity.Description;
+import com.example.codingbat.service.DescriptionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/givenCode")
+@RequestMapping("/api/description")
 
-public class GivenCodeController {
+public class DescriptionController {
     @Autowired
-    GivenCodeService givenCodeService;
+    DescriptionService descriptionService;
 
     //    Create
     @PostMapping
-    public ResponseEntity<ApiResponse> addGivenCode(@Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.addGivenCode(givenCode);
+    public ResponseEntity<ApiResponse> addDescription(@Valid @RequestBody Description description) {
+        ApiResponse apiResponse = descriptionService.addDescription(description);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(201).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -33,22 +33,22 @@ public class GivenCodeController {
 
     //    Get
     @GetMapping
-    public ResponseEntity<List<GivenCode>> getGivenCode() {
-        List<GivenCode> givenCodes = givenCodeService.getGivenCode();
-        return ResponseEntity.ok(givenCodes);
+    public ResponseEntity<List<Description>> getDescription() {
+        List<Description> descriptions = descriptionService.getDescription();
+        return ResponseEntity.ok(descriptions);
     }
 
     //    Get by id
     @GetMapping("/{id}")
-    public ResponseEntity<GivenCode> getGivenCodeById(@PathVariable Integer id) {
-        GivenCode givenCodeById = givenCodeService.getGivenCodeById(id);
-        return ResponseEntity.ok(givenCodeById);
+    public ResponseEntity<Description> getDescriptionById(@PathVariable Integer id) {
+        Description descriptionById = descriptionService.getDescriptionById(id);
+        return ResponseEntity.ok(descriptionById);
     }
 
     //    Update
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editGivenCode(@PathVariable Integer id, @Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.editGivenCode(id, givenCode);
+    public ResponseEntity<ApiResponse> editDescription(@PathVariable Integer id, @Valid @RequestBody Description description) {
+        ApiResponse apiResponse = descriptionService.editDescription(id, description);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -56,8 +56,8 @@ public class GivenCodeController {
 
     //    Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteGivenCode(@PathVariable Integer id) {
-        ApiResponse apiResponse = givenCodeService.deleteGivenCode(id);
+    public ResponseEntity<ApiResponse> deleteDescription(@PathVariable Integer id) {
+        ApiResponse apiResponse = descriptionService.deleteDescription(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
     }
 

@@ -1,8 +1,12 @@
 package com.example.codingbat.controller;
 
+import com.example.codingbat.diler.AnswerDto;
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.GivenCode;
-import com.example.codingbat.service.GivenCodeService;
+import com.example.codingbat.diler.ThemeDto;
+import com.example.codingbat.entity.Answer;
+import com.example.codingbat.entity.Theme;
+import com.example.codingbat.service.AnswerService;
+import com.example.codingbat.service.ThemeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +20,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/givenCode")
+@RequestMapping("/api/theme")
 
-public class GivenCodeController {
+public class ThemeController {
     @Autowired
-    GivenCodeService givenCodeService;
+    ThemeService themeService;
 
     //    Create
     @PostMapping
-    public ResponseEntity<ApiResponse> addGivenCode(@Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.addGivenCode(givenCode);
+    public ResponseEntity<ApiResponse> addTheme(@Valid @RequestBody ThemeDto themeDto) {
+        ApiResponse apiResponse = themeService.addTheme(themeDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(201).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -33,22 +37,22 @@ public class GivenCodeController {
 
     //    Get
     @GetMapping
-    public ResponseEntity<List<GivenCode>> getGivenCode() {
-        List<GivenCode> givenCodes = givenCodeService.getGivenCode();
-        return ResponseEntity.ok(givenCodes);
+    public ResponseEntity<List<Theme>> getTheme() {
+        List<Theme> themes = themeService.getTheme();
+        return ResponseEntity.ok(themes);
     }
 
     //    Get by id
     @GetMapping("/{id}")
-    public ResponseEntity<GivenCode> getGivenCodeById(@PathVariable Integer id) {
-        GivenCode givenCodeById = givenCodeService.getGivenCodeById(id);
-        return ResponseEntity.ok(givenCodeById);
+    public ResponseEntity<Theme> getThemeById(@PathVariable Integer id) {
+        Theme themeById = themeService.getThemeById(id);
+        return ResponseEntity.ok(themeById);
     }
 
     //    Update
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editGivenCode(@PathVariable Integer id, @Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.editGivenCode(id, givenCode);
+    public ResponseEntity<ApiResponse> editTheme(@PathVariable Integer id, @Valid @RequestBody ThemeDto themeDto) {
+        ApiResponse apiResponse = themeService.editTheme(id, themeDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -56,8 +60,8 @@ public class GivenCodeController {
 
     //    Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteGivenCode(@PathVariable Integer id) {
-        ApiResponse apiResponse = givenCodeService.deleteGivenCode(id);
+    public ResponseEntity<ApiResponse> deleteTheme(@PathVariable Integer id) {
+        ApiResponse apiResponse = themeService.deleteTheme(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
     }
 

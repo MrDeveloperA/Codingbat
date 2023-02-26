@@ -9,10 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class GivenCode {
+public class LearnThemes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
-    private String code;
+    @Column(nullable = false, unique = true)
+    private String name;
+    @ManyToOne
+    private Attachment attachment;
+    @ManyToOne
+    private Description description;
 }

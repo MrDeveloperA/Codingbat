@@ -1,9 +1,14 @@
 package com.example.codingbat.controller;
 
 import com.example.codingbat.diler.ApiResponse;
-import com.example.codingbat.entity.GivenCode;
-import com.example.codingbat.service.GivenCodeService;
+import com.example.codingbat.diler.ThemeDto;
+import com.example.codingbat.diler.UserDto;
+import com.example.codingbat.entity.Theme;
+import com.example.codingbat.entity.User;
+import com.example.codingbat.service.ThemeService;
+import com.example.codingbat.service.UserService;
 import jakarta.validation.Valid;
+import org.aspectj.weaver.reflect.InternalUseOnlyPointcutParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +21,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/givenCode")
+@RequestMapping("/api/user")
 
-public class GivenCodeController {
+public class UserController {
     @Autowired
-    GivenCodeService givenCodeService;
+    UserService userService;
 
     //    Create
     @PostMapping
-    public ResponseEntity<ApiResponse> addGivenCode(@Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.addGivenCode(givenCode);
+    public ResponseEntity<ApiResponse> addUser(@Valid @RequestBody UserDto userDto) {
+        ApiResponse apiResponse = userService.addUser(userDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(201).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -33,22 +38,22 @@ public class GivenCodeController {
 
     //    Get
     @GetMapping
-    public ResponseEntity<List<GivenCode>> getGivenCode() {
-        List<GivenCode> givenCodes = givenCodeService.getGivenCode();
-        return ResponseEntity.ok(givenCodes);
+    public ResponseEntity<List<User>> getUser() {
+        List<User> users = userService.getUser();
+        return ResponseEntity.ok(users);
     }
 
     //    Get by id
     @GetMapping("/{id}")
-    public ResponseEntity<GivenCode> getGivenCodeById(@PathVariable Integer id) {
-        GivenCode givenCodeById = givenCodeService.getGivenCodeById(id);
-        return ResponseEntity.ok(givenCodeById);
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+        User userById = userService.getUserById(id);
+        return ResponseEntity.ok(userById);
     }
 
     //    Update
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editGivenCode(@PathVariable Integer id, @Valid @RequestBody GivenCode givenCode) {
-        ApiResponse apiResponse = givenCodeService.editGivenCode(id, givenCode);
+    public ResponseEntity<ApiResponse> editUser(@PathVariable Integer id, @Valid @RequestBody UserDto userDto) {
+        ApiResponse apiResponse = userService.editUser(id, userDto);
         if (apiResponse.isSuccess())
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponse);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
@@ -56,8 +61,8 @@ public class GivenCodeController {
 
     //    Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteGivenCode(@PathVariable Integer id) {
-        ApiResponse apiResponse = givenCodeService.deleteGivenCode(id);
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer id) {
+        ApiResponse apiResponse = userService.deleteUser(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
     }
 

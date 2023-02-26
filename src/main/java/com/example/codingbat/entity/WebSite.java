@@ -9,10 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class GivenCode {
+public class WebSite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
-    private String code;
+    private String name;
+    @ManyToOne
+    private LearnThemes learnThemes;
+    @ManyToOne
+    private Account account;
 }

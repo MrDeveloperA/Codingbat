@@ -9,12 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Solution {
+public class Theme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false, unique = true)
+    private String name;
+    @OneToOne
+    private TaskText taskText;
+    @OneToOne
+    private Task task;
+    @OneToOne
+    private Solution solution;
     @OneToOne
     private GivenCode givenCode;
     @OneToOne
-    private RightAnswer rightAnswer;
+    private Answer answer;
 }
